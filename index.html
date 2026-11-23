@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senior Go Interview Roadmap — pattern-first LeetCode study plan</title>
+<meta name="description" content="A 12-week, pattern-first roadmap for senior Go technical interviews: LeetCode problems ordered easy to hard, plus Go concurrency, runtime and design labs.">
+<meta name="theme-color" content="#080b0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1218'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='11' font-weight='bold' fill='%2300add8' text-anchor='middle'%3EGO%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#track">Skip to the roadmap</a>
+
+<aside class="rail" aria-label="Study progress and navigation">
+  <div class="rail-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">GO</span>
+      <span class="brand-text">Senior<br>Roadmap</span>
+    </a>
+
+    <div class="rail-progress">
+      <div class="ring">
+        <svg viewBox="0 0 104 104" role="img" aria-labelledby="ringLabel">
+          <title id="ringLabel">Overall roadmap progress</title>
+          <circle class="ring-track" cx="52" cy="52" r="44"></circle>
+          <circle class="ring-fill" id="ringFill" cx="52" cy="52" r="44"></circle>
+        </svg>
+        <div class="ring-text">
+          <b id="ringPct">0%</b>
+          <span>complete</span>
+        </div>
+      </div>
+      <p class="rail-count"><b id="railSolved">0</b> of <span id="railTotal">—</span> problems</p>
+      <p class="rail-sub"><span id="railLabs">0</span> of <span id="railLabsTotal">—</span> Go labs shipped</p>
+    </div>
+
+    <dl class="mini-stats" id="miniStats">
+      <div><dt><i class="dot e"></i>Easy</dt><dd><b data-diff-solved="E">0</b>/<span data-diff-total="E">—</span></dd></div>
+      <div><dt><i class="dot m"></i>Medium</dt><dd><b data-diff-solved="M">0</b>/<span data-diff-total="M">—</span></dd></div>
+      <div><dt><i class="dot h"></i>Hard</dt><dd><b data-diff-solved="H">0</b>/<span data-diff-total="H">—</span></dd></div>
+    </dl>
+
+    <nav class="rail-nav" aria-label="Phases">
+      <p class="rail-label">The track</p>
+      <ol id="railPhases"></ol>
+    </nav>
+    <nav class="rail-nav rail-nav-quiet" aria-label="Sections">
+      <a href="#method">Study protocol</a>
+      <a href="#labs">Go labs</a>
+      <a href="#schedule">12-week schedule</a>
+      <a href="#rubric">Grading rubric</a>
+    </nav>
+
+    <div class="rail-actions">
+      <button class="btn btn-primary" id="drillBtn" type="button">Today's drill</button>
+      <button class="btn btn-quiet" id="resetBtn" type="button">Reset progress</button>
+    </div>
+  </div>
+</aside>
+
+<main id="top">
+  <header class="hero" id="main">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Senior Go · technical assessment</p>
+        <h1>From Two Sum<br>to <span class="accent">systems Go.</span></h1>
+        <p class="lede">A pattern-first study plan for senior Go interviews. <b id="heroProblemCount">—</b> LeetCode problems ordered easy → hard, ten Go concurrency and runtime labs, and an explicit protocol for how to drill each one.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#track">Start with phase 01</a>
+          <a class="btn" href="#method">Read the study protocol</a>
+        </div>
+        <p class="hero-foot">12 weeks · ~10 h/week · built for one 90-minute block a day</p>
+      </div>
+
+      <aside class="profile-card" aria-label="Target interview profile">
+        <p class="card-label">Target profile</p>
+        <dl>
+          <div><dt>Loop</dt><dd>1 screen + 2 coding + 1 design</dd></div>
+          <div><dt>Language</dt><dd>Go 1.22+</dd></div>
+          <div><dt>Level</dt><dd>Mid-senior → senior</dd></div>
+          <div><dt>Prep window</dt><dd>12 weeks at ~10 h/week</dd></div>
+          <div><dt>Daily block</dt><dd>90 min, timer visible</dd></div>
+          <div><dt>Load</dt><dd><span data-total-problems>—</span> problems + <span data-total-labs>—</span> labs</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="hero-stats" aria-label="Progress summary">
+      <div class="stat">
+        <span class="stat-label">Solved</span>
+        <b><span id="statSolved">0</span><em>/<span id="statTotal">—</span></em></b>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Go labs</span>
+        <b><span id="statLabs">0</span><em>/<span id="statLabsTotal">—</span></em></b>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Hard solved</span>
+        <b><span id="statHard">0</span><em>/<span id="statHardTotal">—</span></em></b>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Overall</span>
+        <b><span id="statPct">0%</span></b>
+      </div>
+      <div class="hero-bar bar"><i id="heroBar" style="--w:0%"></i></div>
+    </div>
+  </header>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="section-head">
+      <p class="eyebrow">01 / Protocol</p>
+      <h2 id="method-title">How to study the list</h2>
+      <p class="section-lede">Reading a solution feels like progress. It isn't. This loop trades coverage for recall — the thing a senior interview actually measures.</p>
+    </div>
+
+    <div class="method-grid">
+      <ol class="steps">
+        <li>
+          <span class="step-no">01</span>
+          <div>
+            <h3>Calibrate on day zero</h3>
+            <p>Untimed: <b>Two Sum</b>, <b>Valid Parentheses</b>, <b>Merge Intervals</b>. Where you stall tells you what to fix — pattern recognition, Go fluency, or complexity reasoning. Write it down before you plan the weeks.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">02</span>
+          <div>
+            <h3>Drill one pattern at a time</h3>
+            <p>Six to eight problems of the same family, back to back, easy → hard. Recognition is what interviews test; random grinding trains memory of specific problems instead.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">03</span>
+          <div>
+            <h3>Apply the 25-minute rule</h3>
+            <p>Twenty-five minutes solo, timer visible. Then hints in this order: restate constraints → brute force → name the pattern → pseudocode. Read a full solution only after 45 minutes — and rewrite it closed-book the same day.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">04</span>
+          <div>
+            <h3>Write compilable Go every time</h3>
+            <p>Table-driven tests for each solution, <code>go test -race</code> when goroutines are involved, one benchmark per pattern. Never practise in pseudocode; the loop is graded in a compiled language.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">05</span>
+          <div>
+            <h3>Re-solve on a schedule</h3>
+            <p>D+3 from a blank file, D+10 against the clock (medium ≤ 20 min), D+30 in a mixed set. Three spaced re-solves beat ten fresh problems.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">06</span>
+          <div>
+            <h3>Teach it back</h3>
+            <p>Three minutes out loud: constraints, brute force, insight, complexity, edge cases, Go specifics. Record one a week. Senior loops grade the explanation as much as the code.</p>
+          </div>
+        </li>
+      </ol>
+
+      <aside class="rules-card">
+        <p class="card-label">Non-negotiables</p>
+        <ul class="rules">
+          <li>One problem at a time. Phone in another room.</li>
+          <li>No solution copied without a blank-file rewrite.</li>
+          <li>Log one insight sentence per problem.</li>
+          <li>Keep an error log: bounds, nil maps, slice aliasing, byte vs rune, overflow, goroutine leaks.</li>
+          <li>20% of every week is re-solving, not new material.</li>
+          <li>Stop adding problems once unseen mediums fall in 25 minutes with tests. Depth beats count.</li>
+        </ul>
+
+        <p class="card-label block-label">The 90-minute block</p>
+        <ul class="time-block">
+          <li><b>10</b><span>Recall yesterday's pattern from memory</span></li>
+          <li><b>35</b><span>One timed problem: 25 min solve + review</span></li>
+          <li><b>15</b><span>Compare one optimal solution, write the insight</span></li>
+          <li><b>20</b><span>Go lab, or re-solve from the error log</span></li>
+          <li><b>10</b><span>Teach-back out loud, note edge cases</span></li>
+        </ul>
+        <p class="rules-foot">Minutes. Six days a week. One full mock from week 6 onward.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="track" aria-labelledby="track-title">
+    <div class="section-head">
+      <p class="eyebrow">02 / Problem track</p>
+      <h2 id="track-title">The roadmap, easy to hard</h2>
+      <p class="section-lede">Each phase adds one pattern family and keeps reusing the previous ones. Within a phase, problems run easy → hard; across the track, the ramp goes from array drills to O(1) data-structure design. The list is a menu, not a debt: if a phase's hards are eating the week, bank the mediums and move on.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <label class="search">
+        <span class="visually-hidden">Search problems</span>
+        <input id="search" type="search" placeholder="Search title, number, or pattern…" autocomplete="off" spellcheck="false">
+        <kbd>/</kbd>
+      </label>
+
+      <div class="chips" role="group" aria-label="Filter by difficulty">
+        <button class="chip is-active" type="button" data-diff="all">All <b data-diff-count="all">—</b></button>
+        <button class="chip" type="button" data-diff="E">Easy <b data-diff-count="E">—</b></button>
+        <button class="chip" type="button" data-diff="M">Medium <b data-diff-count="M">—</b></button>
+        <button class="chip" type="button" data-diff="H">Hard <b data-diff-count="H">—</b></button>
+      </div>
+
+      <label class="select-wrap">
+        <span class="visually-hidden">Filter by pattern</span>
+        <select id="patternSelect"></select>
+      </label>
+
+      <label class="switch">
+        <input type="checkbox" id="hideDone">
+        <span>Unfinished only</span>
+      </label>
+
+      <div class="filter-sub">
+        <p id="visibleCount" aria-live="polite">Showing all problems</p>
+        <p class="filter-hint">Links open leetcode.com · progress stays in this browser</p>
+      </div>
+    </div>
+
+    <div id="phases" class="phases"></div>
+
+    <p class="track-note">Premium-only problems are deliberately excluded. Every problem here has a free LeetCode page, and every phase ends with at least one problem you should be able to re-solve cold.</p>
+  </section>
+
+  <section class="section" id="labs" aria-labelledby="labs-title">
+    <div class="section-head">
+      <p class="eyebrow">03 / Go track</p>
+      <h2 id="labs-title">The other half of the loop</h2>
+      <p class="section-lede">Senior Go assessments stop being algorithm quizzes after round one. These are the build-it labs that expose goroutine leaks, lock scope, and allocation habits — the things a LeetCode streak will not teach you.</p>
+    </div>
+
+    <div class="lab-progress">
+      <div class="bar"><i id="labBar" style="--w:0%"></i></div>
+      <p><b id="labDoneCount">0</b> / <span id="labTotalCount">—</span> labs shipped · each is a small repo with tests, race detector, and a short README</p>
+    </div>
+
+    <div id="labGrid" class="labs"></div>
+
+    <div class="design-drills">
+      <div class="design-head">
+        <p class="card-label">Design rounds · rehearse out loud</p>
+        <p>45 minutes each, no editor. Sketch the boxes, then defend every box.</p>
+      </div>
+      <div class="design-grid">
+        <article>
+          <span class="design-no">D1</span>
+          <h4>Rate-limited API gateway</h4>
+          <p>Per-key token buckets, 429 and Retry-After, hot-key sharding, and where limiter state lives.</p>
+        </article>
+        <article>
+          <span class="design-no">D2</span>
+          <h4>URL shortener</h4>
+          <p>Base62 ID generation, read-path caching, collision and expiry strategy, analytics off the hot path.</p>
+        </article>
+        <article>
+          <span class="design-no">D3</span>
+          <h4>Job queue, at-least-once</h4>
+          <p>Visibility timeouts, idempotency keys, dead-letter queue, and the ordering guarantees you give up.</p>
+        </article>
+        <article>
+          <span class="design-no">D4</span>
+          <h4>Metrics pipeline</h4>
+          <p>Batching, backpressure, cardinality limits, sampling, and when to degrade instead of drop.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule" aria-labelledby="schedule-title">
+    <div class="section-head">
+      <p class="eyebrow">04 / Calendar</p>
+      <h2 id="schedule-title">The 12-week schedule</h2>
+      <p class="section-lede">Six focused days a week, one 90-minute block a day. Weeks 1–9 add patterns, weeks 10–12 convert knowledge into interview performance.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="schedule">
+        <thead>
+          <tr><th scope="col">Week</th><th scope="col">Focus</th><th scope="col">Go lab</th><th scope="col">Checkpoint</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="week">W01</span></td><td>Arrays, strings, hashing I — build the one-pass map reflex</td><td>Read Effective Go; slices &amp; maps internals lab</td><td>Calibration notes written</td></tr>
+          <tr><td><span class="week">W02</span></td><td>Hashing II, two pointers, sliding window</td><td>Ring buffer + min-stack from scratch</td><td>3 mediums in ≤ 30 min</td></tr>
+          <tr><td><span class="week">W03</span></td><td>Sliding window, stacks, monotonic stack</td><td>Deque + monotonic-stack drills</td><td>Timed mock #1 (45 min)</td></tr>
+          <tr><td><span class="week">W04</span></td><td>Linked lists, fast &amp; slow, in-place rewiring</td><td>Generics LRU with race tests</td><td>Re-solve 4 old problems</td></tr>
+          <tr><td><span class="week">W05</span></td><td>Trees, BST invariants, heaps, top-k</td><td>Trie + heap from scratch</td><td>Mock #2 + teach-back</td></tr>
+          <tr><td><span class="week">W06</span></td><td>Intervals, greedy, graph traversal</td><td>Union-find with path compression</td><td>Mixed 5-problem set</td></tr>
+          <tr><td><span class="week">W07</span></td><td>Topological sort, Dijkstra, Bellman-Ford, MST</td><td>Dijkstra with container/heap</td><td>Mock #3 (graphs)</td></tr>
+          <tr><td><span class="week">W08</span></td><td>DP I — 1D states, knapsack, subsequences</td><td>Token-bucket rate limiter</td><td>Speed run: 3 mediums</td></tr>
+          <tr><td><span class="week">W09</span></td><td>DP II + design structures (LRU, LFU, iterators)</td><td>singleflight + TTL cache</td><td>Mock #4 (design)</td></tr>
+          <tr><td><span class="week">W10</span></td><td>No new patterns — mixed sets and weak-spot repair</td><td>Worker pool, pprof lab, race detector</td><td>3 teach-backs recorded</td></tr>
+          <tr><td><span class="week">W11</span></td><td>Systems design in Go: gateway, queue, metrics</td><td>Production HTTP service</td><td>Mock #5 (full loop)</td></tr>
+          <tr><td><span class="week">W12</span></td><td>Taper — re-solve only, two timed sets, behavioural stories</td><td>No new labs; polish READMEs</td><td>Rest + interview logistics</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="rubric" aria-labelledby="rubric-title">
+    <div class="section-head">
+      <p class="eyebrow">05 / Scorecard</p>
+      <h2 id="rubric-title">What the loop actually grades</h2>
+      <p class="section-lede">Algorithm correctness gets you through the screen. The senior decision is made on the other four rows.</p>
+    </div>
+
+    <div class="rubric-grid">
+      <div class="rubric">
+        <div class="rubric-row">
+          <div class="rubric-label"><span>Problem solving &amp; complexity</span><b>30%</b></div>
+          <div class="bar"><i style="--w:30%"></i></div>
+          <p>Recognises the pattern, proves correctness, states time and space with <code>n</code> defined.</p>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-label"><span>Go fluency &amp; idioms</span><b>25%</b></div>
+          <div class="bar"><i style="--w:25%"></i></div>
+          <p>Idiomatic slices, maps, interfaces; explicit errors; no panic-driven control flow; allocation awareness.</p>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-label"><span>Concurrency &amp; runtime</span><b>20%</b></div>
+          <div class="bar"><i style="--w:20%"></i></div>
+          <p>Safe primitives, cancellation, no leaks; scheduler, channels, and GC intuition under pressure.</p>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-label"><span>Design &amp; tradeoffs</span><b>15%</b></div>
+          <div class="bar"><i style="--w:15%"></i></div>
+          <p>Chooses and defends; names failure modes, backpressure, and what changes at 10× traffic.</p>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-label"><span>Communication</span><b>10%</b></div>
+          <div class="bar"><i style="--w:10%"></i></div>
+          <p>Thinks aloud, takes hints gracefully, ends with a clear summary and what they would do next.</p>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <p class="card-label">Instant downgrades</p>
+        <ul class="downgrades">
+          <li>Coding before restating constraints and input size.</li>
+          <li>“It's O(n)” with no variable defined.</li>
+          <li>Swallowing errors with <code>_</code> to keep moving.</li>
+          <li>Unbounded goroutines, no context, no shutdown path.</li>
+          <li>“I'd use a library” with no design underneath it.</li>
+          <li>Silent debugging for more than two minutes.</li>
+        </ul>
+        <p class="card-label block-label">Close every round with</p>
+        <p class="close-line">“Here's the approach, the complexity, the edge cases I tested, and what I'd change at scale.”</p>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <span class="brand-mark small" aria-hidden="true">GO</span>
+      <p>Senior Go interview roadmap · built as a personal study tracker. No account, no backend: progress lives in <code>localStorage</code>.</p>
+    </div>
+    <p class="footer-meta">Problem links point to leetcode.com. Ordering and study protocol are the opinionated part.</p>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">This roadmap renders its problem list with JavaScript. Enable it to use the tracker.</p></noscript>
+<script src="scripts.js" defer></script>
+</body>
+</html>
